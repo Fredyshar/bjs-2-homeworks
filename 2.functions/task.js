@@ -16,9 +16,7 @@ function getArrayParams(...arr) {
 }
 
 function summElementsWorker(...arr) {
-  let sum = arr.reduce(function (currentSum, currentNumber) {
-    return currentSum + currentNumber
-  }, 0);
+  let sum = arr.reduce((acc, item) => acc + item, 0);
   return sum;
 }
 
