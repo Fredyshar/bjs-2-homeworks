@@ -6,13 +6,13 @@ function compareArrays(arr1, arr2) {
 }
 
 function getUsersNamesInAgeRange(users, gender) {
-    if (Array.isArray(users)) {
-        let filterList = users.filter(user => user.gender === gender);
-        if (filterList.length !== 0) {
-            let avgAge = (filterList.reduce((acc, item) => acc + item.age, 0)) / filterList.length;
-        return avgAge;
-        } else {
-            return 0;
-            }
-    }
+  if (Array.isArray(users)) {
+    let filterList = users.filter(user => user.gender === gender);
+    if (filterList.length !== 0) {
+      let avgAge = (filterList.reduce((acc, item) => acc + item.age, 0)) / filterList.length;
+      return avgAge;
+      } else {
+        return 0;
+        }
+  }
 }
