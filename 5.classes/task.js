@@ -1,12 +1,10 @@
 class PrintEditionItem {
     
     constructor (name, releaseDate, pagesCount, state, type) {
-        state = 100;
-        type = null;
         this.name = name;
         this.releaseDate = releaseDate;
         this.pagesCount = pagesCount;
-        this.state = state;
+        this.state = 100;
         this.type = null;
  
     }
@@ -31,14 +29,14 @@ class PrintEditionItem {
 }
 
 class Magazine extends PrintEditionItem {
-        constructor(name, releaseDate, pagesCount, state) {
+        constructor(name, releaseDate, pagesCount, state, type) {
         super(name, releaseDate, pagesCount, state);
         this.type = "magazine";
     }
 }
 
 class Book extends PrintEditionItem {
-    constructor(author, name, releaseDate, pagesCount, state) {
+    constructor(author, name, releaseDate, pagesCount, state, type) {
         super(name, releaseDate, pagesCount, state);
         this.author = author;
         this.type = "book";
@@ -46,7 +44,7 @@ class Book extends PrintEditionItem {
 }
 
 class NovelBook extends Book {
-    constructor(author, name, releaseDate, pagesCount, state) {
+    constructor(author, name, releaseDate, pagesCount, state, type) {
         super(name, releaseDate, pagesCount, state);
         this.author = author;
         this.type = "novel";
@@ -54,7 +52,7 @@ class NovelBook extends Book {
 }
 
 class FantasticBook extends Book {
-    constructor(author, name, releaseDate, pagesCount, state) {
+    constructor(author, name, releaseDate, pagesCount, state, type) {
         super(name, releaseDate, pagesCount, state);
         this.author = author;
         this.type = "fantastic";
@@ -62,7 +60,7 @@ class FantasticBook extends Book {
 }
 
 class DetectiveBook extends Book {
-    constructor(author, name, releaseDate, pagesCount, state) {
+    constructor(author, name, releaseDate, pagesCount, state, type) {
         super(name, releaseDate, pagesCount, state);
         this.author = author;
         this.type = "detective";
@@ -75,9 +73,8 @@ class DetectiveBook extends Book {
 
 class Library {
     constructor(name, books) {
-        books = [];
         this.name = name;
-        this.books = books;
+        this.books = [];
     }
 
     addBook(book) {
@@ -104,5 +101,40 @@ class Library {
         }
         return result;
     }
-
 } 
+
+function Student(name) {
+    this.name = name;
+    this.mark = {};
+}
+  
+ 
+  Student.prototype.addMark = function (mark, subjectName) {
+    if (mark < 2 || mark > 5) {
+        return;
+      }        
+
+    if (subjectName in this.mark) {
+        this.mark[subjectName].push(mark);
+        } else {
+            this.mark = Object.assign(this.mark, {[subjectName]: [mark]});
+            }
+} 
+
+  Student.prototype.getAverageBySubject = function (subjectName) {
+    let avgMark = 0;
+    if (this.mark[subjectName] === undefined) {
+      return avgMark;
+      } else {
+        let sumMarks = (this.mark[subjectName].reduce((acc, item) => acc + item, 0));
+        avgMark = sumMarks / this.mark[subjectName].length;
+    }
+    return avgMark;
+  }
+  
+  Student.prototype.getAverage = function () {
+    let allSubject = Object.keys(this.mark);
+    let summ = allSubject.reduce((acc, item) => acc + this.getAverageBySubject(item), 0);
+    return summ / allSubject.length;
+  }
+  
