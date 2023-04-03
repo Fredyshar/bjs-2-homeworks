@@ -105,7 +105,7 @@ class Library {
 
 function Student(name) {
     this.name = name;
-    this.mark = {};
+    this.marks = {};
 }
   
  
@@ -114,27 +114,31 @@ function Student(name) {
         return;
       }        
 
-    if (subjectName in this.mark) {
-        this.mark[subjectName].push(mark);
+    if (subjectName in this.marks) {
+        this.marks[subjectName].push(mark);
         } else {
-            this.mark = Object.assign(this.mark, {[subjectName]: [mark]});
+            this.marks = Object.assign(this.marks, {[subjectName]: [mark]});
             }
 } 
 
   Student.prototype.getAverageBySubject = function (subjectName) {
     let avgMark = 0;
-    if (this.mark[subjectName] === undefined) {
+    if (this.marks[subjectName] === undefined) {
       return avgMark;
       } else {
-        let sumMarks = (this.mark[subjectName].reduce((acc, item) => acc + item, 0));
-        avgMark = sumMarks / this.mark[subjectName].length;
+        let sumMarks = (this.marks[subjectName].reduce((acc, item) => acc + item, 0));
+        avgMark = sumMarks / this.marks[subjectName].length;
     }
     return avgMark;
   }
   
   Student.prototype.getAverage = function () {
-    let allSubject = Object.keys(this.mark);
+    let allSubject = Object.keys(this.marks);
     let summ = allSubject.reduce((acc, item) => acc + this.getAverageBySubject(item), 0);
-    return summ / allSubject.length;
+    if (summ === 0) {
+        return 0;
+    } else {
+        return summ / allSubject.length;
+    }
   }
   
